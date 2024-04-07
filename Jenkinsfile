@@ -1,14 +1,14 @@
 pipeline {
     agent {
         docker {
-            image 'maven:latest' 
-            args '--privileged -v /var/lib/jenkins/.m2:/root/.m2'
+            image 'maven:latest'
+            args '--privileged -v /var/lib/jenkins/.m2:/.m2/'
         }
     }
     stages {
         stage('Build') { 
             steps {
-                sh 'mvn -B -DskipTests clean package' 
+                sh 'mvn -e -B -DskipTests clean package' 
             }
         }
         stage('Test') {
